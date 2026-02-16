@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>El nom del cotxe es {{ car.name }}</h1>
+    <p class="car_name">{{ car.name }}</p>
+
+    {% if car.name == "Corolla" %}
+    <p>El cotxe és un Corolla</p>
+{% else %}
+    <p>El cotxe no és un Corolla</p>
+{% endif %}
+{% endblock %}

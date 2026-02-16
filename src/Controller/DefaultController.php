@@ -28,6 +28,19 @@ class DefaultController extends AbstractController
         );
     }
 
+    #[Route('/hello/car/{carId}', name: 'app_get_car')]
+    public function carById(int $carId): Response
+    {
+        $car = $this->carRepository->find($carId);
+
+        return $this->render(
+            'demo/conditional_car.html.twig',
+            [
+                'car' => $car,
+            ]
+        );
+    }
+
     #[Route('/hello/cars/{brandId}', name: 'app_get_cars')]
     public function carsById(int $brandId): Response
     {

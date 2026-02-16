@@ -1,23 +1,20 @@
 
+{% extends 'base.html.twig' %}
+
+{% block body %}
 <h1>Tabla de coches de la marca {{ brand.name }}</h1>
 
-<table border="1" cellpadding="5">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Coche</th>
-    </tr>
-    </thead>
-    <tbody>
+<ul>
     {% for car in cars %}
-        <tr>
-            <td>{{ car.id }}</td>
-            <td>{{ car.name }}</td>
-        </tr>
+        <li>
+            <strong>ID:</strong> {{ car.id }} —
+            <strong>Coche:</strong> {{ car.name }}
+            <p class="car_name {{ car.name == 'Corolla' ? 'car_special' : '' }} {{ car.name == 'Yaris' ? 'important' : '' }}">
+                {{ car.name }}
+            </p>
+        </li>
     {% else %}
-        <tr>
-            <td colspan="2">No hay coches :c</td>
-        </tr>
+        <li>No hay coches :c</li>
     {% endfor %}
-    </tbody>
-</table>
+</ul>
+{% endblock %}
