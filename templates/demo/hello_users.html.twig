@@ -1,0 +1,24 @@
+{# Esta vista es lo único hecho con IA. No recordaba la estructura de las tablas y no quería perder tiempo buscándolo #}
+
+<h1>Tabla de Usuarios!</h1>
+
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Usuario</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">No hay usuarios</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

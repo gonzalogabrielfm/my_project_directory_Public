@@ -1,0 +1,23 @@
+
+<h1>Tabla de coches de la marca {{ brand.name }}</h1>
+
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Coche</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for car in cars %}
+        <tr>
+            <td>{{ car.id }}</td>
+            <td>{{ car.name }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">No hay coches :c</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
