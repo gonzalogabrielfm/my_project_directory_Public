@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\BrandRepository;
+use App\Service\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\CarRepository;
@@ -13,17 +14,30 @@ class DefaultController extends AbstractController
     public function __construct(
         private readonly CarRepository $carRepository,
         private readonly BrandRepository $brandRepository,
+        private readonly CacheManager  $cacheManager
 
     )    {
     }
+
     #[Route('/hello/demo', name: 'app_hello_demo')]
     public function helloDemo(): Response
     {
-        $firstCar = $this->carRepository->find(1);
+        $carsInfo = $this->cacheManager->get('carsInfo');
+        if (!$carsInfo) {
+            $numberOfToyota = count($this->carRepository->findCarsWithCertainName("Fiesta"));
+            $carsInfo = ['number_cars' => $numberOfToyota];
+            $this->cacheManager->set('carsInfo', json_encode($carsInfo));
+        } else {
+            $carsInfo = json_decode($carsInfo, true);
+        }
+
+        $allFiestas = $this->carRepository->findCarsWithCertainName("Fiesta");
+
         return $this->render(
             'demo/hello_demo.html.twig',
             [
-                'text' => $firstCar->getName(),
+                'cars' => $allFiestas,
+                'carsInfo' => $carsInfo
             ]
         );
     }

@@ -1,3 +1,13 @@
+{% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    <script src="/js/cars.js"></script>
+{% endblock %}
 
-<h1>El nom del cotxe es {{ text }}</h1>
+{% block body %}
+    <h1>Llistat de cotxes que es diuen Fiesta</h1>
+
+    {% for car in cars %}
+        <p class="car-name" {% if car.name == "Toyota" %}id="important"{% endif %}>{{ car.name }}</p>
+    {% endfor %}
+{% endblock %}
